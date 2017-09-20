@@ -1,0 +1,26 @@
+.box-homes .header{
+    background: rgba(0, 0, 0, 0) url('../images/bgv.png') no-repeat scroll left center;
+}
+table {
+    background-color: transparent;
+}
+.box-homes table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 30px 0px;
+    width: 100%;
+}
+.box-homes table tr:first-of-type {
+    background: #2e9610 none repeat scroll 0 0;
+    font-family: "Roboto Condensed",Arial,Helvetica,sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #fff;
+}
+.box-homes td {
+    border: 1px solid #2e9610;
+    padding: 9px;
+    text-align: center;
+    vertical-align: middle;
+}
