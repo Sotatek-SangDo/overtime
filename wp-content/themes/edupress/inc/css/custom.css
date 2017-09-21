@@ -1,0 +1,60 @@
+.content-list {
+    width: 100%;
+    margin: 0 auto;
+    padding: 5% 5% 5% 0;
+}
+.hidden {
+    display: none;
+}
+.list-title {
+    color: #555;
+    font-size: 3rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    margin-right: 10xp !important;
+}
+.content-list table {
+    width: 70%
+}
+
+.content-list table thead tr{
+    height: 50px;
+    line-height: 2;
+    background: #2e9610 none repeat scroll 0 0;
+}
+.content-list table thead tr,
+.content-list table thead tr td {
+    border: 1px solid #e0e0e0;
+    color: #fff;
+    text-align: center;
+}
+.content-list table thead tr td {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    vertical-align: middle;
+    text-align: start;
+}
+.content-list table tbody tr td {
+    padding-left: 20px;
+    font-size: 1.7rem;
+    font-style: normal;
+    font-weight: 700;
+    vertical-align: middle;
+}
+.content-list table tbody tr td i {
+    margin-right: 8px;
+}
+.content-list table tbody td:last-child,
+.content-list table tbody td:nth-last-child(2) {
+    text-align: center;
+}
+
+.container-add {
+    width: 100%;
+    margin: 0;
+    padding: 5% 5% 5% 0;
+}
+.container-add form {
+    width: 30%;
+}

@@ -4,6 +4,27 @@
 * Created by: sang.do
 * Date: 19/9/2017
 */
+require get_template_directory() . '/inc/model/teacher.php';
+
+add_action( 'admin_enqueue_scripts', 'url_wp_admin_ajax' );
+
+function checkIssetKey($data, $key)
+{
+    if(isset($data)) {
+        return $data[$key];
+    }
+    return '';
+}
+function url_wp_admin_ajax()
+{
+    wp_enqueue_script( 'my_script', get_template_directory_uri() . '/inc/js/admin.js' );
+
+    wp_enqueue_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', array(), '3.3.7');
+
+    wp_enqueue_style('custom', get_template_directory_uri() . '/inc/css/custom.css', array(), '1.0');
+
+    wp_enqueue_script('bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array(), '3.3.7');
+}
 
 if( !function_exists('custom_pagination') ) :
 
@@ -76,14 +97,140 @@ endif;
 
 if( !function_exists('my_plugin_menu_teacher')) :
     function my_plugin_menu_teacher() {
-        add_menu_page(__('Teacher', 'edupress'), __('Teacher', 'edupress'), 'manage_options', 'teacher/list', 'show_list_teacher' );
-        add_submenu_page(__FILE__, __('Danh Sách', 'edupress'), 'Danh S', 'manage_options', __FILE__.'/custom', 'show_list_teacher');
-        add_submenu_page(__FILE__, __('Add new', 'edupress'), __('Add new', 'edupress'), 'manage_options', __FILE__.'/about', 'add_new_teacher');
+        $icon = 'http://www.missnews.com.br/imagens/icon-topo-autor.png';
+        add_menu_page('Giáo Viên', 'Giáo Viên', 'manage_options', 'teacher/list', 'show_list_teacher', $icon);
+        add_submenu_page('teacher/list', 'Thêm mới', 'Thêm mới', 'manage_options', 'teacher/add', 'add_new_teacher');
     }
     add_action('admin_menu', 'my_plugin_menu_teacher');
 endif;
-    
+
 function show_list_teacher()
 {
-    echo 'hello';
+    global $teacher;
+
+    $_SESSION['admin_url_list'] = get_current_url();
+
+    $teacher = new Teacher();
+    $teacher->create_table();
+    $_SESSION['list_teacher'] = $teacher->getList();
+
+    require get_template_directory() . '/inc/templates/teacher_list.php';
 }
+function add_new_teacher()
+{
+    global $teacher;
+
+    $_SESSION['admin_url_add'] = get_current_url();
+    unset($_SESSION['teacher_current']);
+    if( isset($_REQUEST['id']) ) {
+        $teacher = new Teacher();
+
+        $_SESSION['teacher_current'] = $teacher->show($_REQUEST['id']);
+    }
+
+    require get_template_directory() . '/inc/templates/add_teacher.php';
+}
+
+function get_current_url()
+{
+    $protocol = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+    $url = $protocol. $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'];
+
+    return $url;
+}
+
+
+// ajax wp-admin
+
+function ajax_add_teacher() {
+
+    $return = [];
+
+    if ( isset($_REQUEST) ) {
+
+        $teacher = new Teacher();
+
+        $data = $_REQUEST['teacher'];
+
+        $return = $_REQUEST['redirect'];
+
+        $teacher->store($data);
+
+        wp_send_json_success( $return );
+    }
+
+    wp_die();
+}
+
+add_action( 'wp_ajax_add_teacher', 'ajax_add_teacher' );
+add_action( 'wp_ajax_nopriv_add_teacher', 'ajax_add_teacher' );
+
+add_action( 'wp_ajax_update_teacher', 'ajax_update_teacher' );
+add_action( 'wp_ajax_nopriv_update_teacher', 'ajax_update_teacher' );
+
+function ajax_update_teacher() {
+
+    $return = [];
+
+    if ( isset($_REQUEST) ) {
+
+        $teacher = new Teacher();
+
+        $id = $_REQUEST['id'];
+
+        $return = $_REQUEST['redirect'];
+
+        $data = $_REQUEST['teacher'];
+
+        $teacher->update($id, $data);
+
+        wp_send_json_success( $return );
+    }
+
+    wp_die();
+}
+
+add_action( 'wp_ajax_delete_teacher', 'ajax_delete_teacher' );
+add_action( 'wp_ajax_nopriv_delete_teacher', 'ajax_delete_teacher' );
+
+function ajax_delete_teacher() {
+
+    $return = [];
+
+    if ( isset($_REQUEST) ) {
+
+        $teacher = new Teacher();
+
+        $id = $_REQUEST['id'];
+
+        $return = $_REQUEST['redirect'];
+
+        $teacher->destroy($id);
+
+        wp_send_json_success( $return );
+    }
+
+    wp_die();
+}
+
+function image_uploader_field( $name, $value = '', $src) {
+    $image = ' button">Upload image';
+    $image_size = 'full';
+    $display = (!$value) ? 'none' : 'block';
+
+    if( $image_attributes = wp_get_attachment_image_src( $value, $image_size ) ) {
+
+        $image = '"><img src="' . $image_attributes[0] . '" style="max-width:95%;display:block;" />';
+        $display = 'inline-block';
+
+    }
+
+    return '
+    <div>
+        <a href="#" class="misha_upload_image_button' . $image . '</a>
+        <input type="hidden" name="' . $name . '" id="' . $name . '" value="' . $src . '" />
+        <input type="hidden" name="img_id" value="' . $value . '" />
+        <a href="#" class="misha_remove_image_button" style="display:inline-block;display:' . $display . '">Remove image</a>
+    </div>';
+}
+

@@ -7,6 +7,18 @@
  *
  * @package EduPress
  */
+ob_start();
+session_start();
+
+function include_myuploadscript() {
+	if ( ! did_action( 'wp_enqueue_media' ) ) {
+		wp_enqueue_media();
+	}
+
+ 	wp_enqueue_script( 'myuploadscript', get_stylesheet_directory_uri() . '/inc/js/customscript.js', array('jquery'), null, false );
+}
+
+add_action( 'admin_enqueue_scripts', 'include_myuploadscript' );
 
 if ( ! function_exists( 'edupress_setup' ) ) :
 /**
@@ -44,7 +56,7 @@ function edupress_setup() {
 	add_theme_support( 'post-thumbnails' );
 
 	set_post_thumbnail_size( 240, 180, true );
-	
+
 	// Featured Post Main Thumbnail on the front page & single page template
 	add_image_size( 'edupress-large-thumbnail', 780, 400, true );
 
@@ -92,7 +104,7 @@ add_action( 'after_setup_theme', 'edupress_setup' );
  * @global int $content_width
  */
 function edupress_content_width() {
-	
+
 	$GLOBALS['content_width'] = apply_filters( 'edupress_content_width', 780 );
 
 }
@@ -132,7 +144,7 @@ function edupress_widgets_init() {
 		'before_title'  => '<p class="widget-title">',
 		'after_title'   => '</p>',
 	) );
-	
+
 	register_sidebar( array(
 		'name'          => esc_html__( 'Footer: Column 2', 'edupress' ),
 		'id'            => 'sidebar-footer-2',
@@ -142,7 +154,7 @@ function edupress_widgets_init() {
 		'before_title'  => '<p class="widget-title">',
 		'after_title'   => '</p>',
 	) );
-	
+
 	register_sidebar( array(
 		'name'          => esc_html__( 'Footer: Column 3', 'edupress' ),
 		'id'            => 'sidebar-footer-3',
@@ -152,7 +164,7 @@ function edupress_widgets_init() {
 		'before_title'  => '<p class="widget-title">',
 		'after_title'   => '</p>',
 	) );
-	
+
 	register_sidebar( array(
 		'name'          => esc_html__( 'Footer: Column 4', 'edupress' ),
 		'id'            => 'sidebar-footer-4',
