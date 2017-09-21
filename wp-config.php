@@ -65,6 +65,7 @@ define('NONCE_SALT',       'VSIEA+t12GNXU_ofzNawle{hBFKd)jF~4)W[%JG5xON P&V.*po]
  */
 $table_prefix  = 'edu_';
 
+define('FS_METHOD', 'direct'); // install plugin
 /**
  * For developers: WordPress debugging mode.
  *
