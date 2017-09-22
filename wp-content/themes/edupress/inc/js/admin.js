@@ -1,11 +1,9 @@
 jQuery(function() {
     window.ajaxUrl = "http://" + window.location.host +"/wp-admin/admin-ajax.php";
 })
-
 function addNew() {
     var form = jQuery('form.add-form');
     var redirect = jQuery('input[name="_redirect"]').val();
-
     jQuery.ajax({
         url: window.ajaxUrl,
         data: {
@@ -35,7 +33,6 @@ function addNew() {
 function show(id) {
     window.location = 'http://' + window.location.host + '/wp-admin/admin.php?page=teacher%2Fadd&id=' + id;
 }
-
 function destroy(id) {
     var redirect = jQuery('input[name="_redirect"]').val();
     jQuery.ajax({
