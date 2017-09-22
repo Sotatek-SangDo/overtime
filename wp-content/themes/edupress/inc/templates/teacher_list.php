@@ -1,6 +1,6 @@
 <div id="wpbody" role="main">
 <?php $class = ['active', 'warning', 'info', 'danger', 'success']; ?>
-    <div id="wpbody-content" aria-label="Main content" tabindex="0">
+    <div id="wpbody-content" aria-label="Main content" tabindex="0" class="transparent-background">
         <div class="wrap">
             <h1 class="wp-heading-inline list-title">Giáo Viên</h1>
             <a href="<?php echo admin_url('/admin.php?page=teacher/add'); ?>" class="page-title-action action-page">Add New</a>
@@ -18,9 +18,8 @@
                 </thead>
                 <tbody>
                     <?php if(count($_SESSION['list_teacher'])) : ?>
-                        <?php foreach ($_SESSION['list_teacher'] as $value):
+                        <?php foreach ($_SESSION['list_teacher'] as $teacher):
                             $rand = rand(0, 4); ?>
-                            <?php $teacher =  get_object_vars($value);?>
                             <tr class="<?php echo $class[$rand]; ?>">
                                 <td><?php echo $teacher['name']; ?></td>
                                 <td><?php echo $teacher['level']; ?></td>

@@ -35,7 +35,7 @@ class Teacher {
         global $wpdb;
         $sql = "SELECT * FROM `$this->table`";
 
-        $teachers = $wpdb->get_results($sql);
+        $teachers = $wpdb->get_results($sql, ARRAY_A);
         return $teachers;
     }
 

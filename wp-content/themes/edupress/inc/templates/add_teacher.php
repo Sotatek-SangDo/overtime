@@ -1,8 +1,12 @@
 <div id="wpbody" role="main">
 
-    <div id="wpbody-content" aria-label="Main content" tabindex="0">
+    <div id="wpbody-content" aria-label="Main content" tabindex="0" class="transparent-background">
         <div class="wrap">
-            <h1 class="wp-heading-inline">Thêm mới</h1>
+            <?php if(!isset($_SESSION['teacher_current']['id'])) : ?>
+                <h1 class="wp-heading-inline"><i class="glyphicon glyphicon-plus"></i>Thêm mới</h1>
+            <?php else : ?>
+                <h1 class="wp-heading-inline"><i class="glyphicon glyphicon-edit"></i>Sửa thông tin</h1>
+            <?php endif; ?>
         </div>
         <div class="container-add">
             <form class="add-form">

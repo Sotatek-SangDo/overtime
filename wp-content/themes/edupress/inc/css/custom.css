@@ -58,3 +58,14 @@
 .container-add form {
     width: 30%;
 }
+.transparent-background {
+    background: #fafafa;
+    padding-left: 2%;
+}
+.wp-heading-inline i{
+    margin-right: 8px;
+}
+textarea[name="information"] {
+    resize: none;
+    text-align: start;
+}

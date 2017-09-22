@@ -8,6 +8,8 @@ require get_template_directory() . '/inc/model/teacher.php';
 
 add_action( 'admin_enqueue_scripts', 'url_wp_admin_ajax' );
 
+$teacher = new Teacher();
+
 function checkIssetKey($data, $key)
 {
     if(isset($data)) {
@@ -106,26 +108,20 @@ endif;
 
 function show_list_teacher()
 {
-    global $teacher;
-
     $_SESSION['admin_url_list'] = get_current_url();
 
-    $teacher = new Teacher();
-    $teacher->create_table();
-    $_SESSION['list_teacher'] = $teacher->getList();
+    $GLOBALS['teacher']->create_table();
+    $_SESSION['list_teacher'] = $GLOBALS['teacher']->getList();
 
     require get_template_directory() . '/inc/templates/teacher_list.php';
 }
 function add_new_teacher()
 {
-    global $teacher;
-
     $_SESSION['admin_url_add'] = get_current_url();
     unset($_SESSION['teacher_current']);
     if( isset($_REQUEST['id']) ) {
-        $teacher = new Teacher();
 
-        $_SESSION['teacher_current'] = $teacher->show($_REQUEST['id']);
+        $_SESSION['teacher_current'] = $GLOBALS['teacher']->show($_REQUEST['id']);
     }
 
     require get_template_directory() . '/inc/templates/add_teacher.php';
@@ -148,13 +144,11 @@ function ajax_add_teacher() {
 
     if ( isset($_REQUEST) ) {
 
-        $teacher = new Teacher();
-
         $data = $_REQUEST['teacher'];
 
         $return = $_REQUEST['redirect'];
 
-        $teacher->store($data);
+        $GLOBALS['teacher']->store($data);
 
         wp_send_json_success( $return );
     }
@@ -174,15 +168,13 @@ function ajax_update_teacher() {
 
     if ( isset($_REQUEST) ) {
 
-        $teacher = new Teacher();
-
         $id = $_REQUEST['id'];
 
         $return = $_REQUEST['redirect'];
 
         $data = $_REQUEST['teacher'];
 
-        $teacher->update($id, $data);
+        $GLOBALS['teacher']->update($id, $data);
 
         wp_send_json_success( $return );
     }
@@ -199,13 +191,11 @@ function ajax_delete_teacher() {
 
     if ( isset($_REQUEST) ) {
 
-        $teacher = new Teacher();
-
         $id = $_REQUEST['id'];
 
         $return = $_REQUEST['redirect'];
 
-        $teacher->destroy($id);
+        $GLOBALS['teacher']->destroy($id);
 
         wp_send_json_success( $return );
     }
@@ -234,3 +224,9 @@ function image_uploader_field( $name, $value = '', $src) {
     </div>';
 }
 
+// get list
+
+function get_list_teacher()
+{
+    return $GLOBALS['teacher']->getList();
+}
