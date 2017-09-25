@@ -244,6 +244,8 @@ function edupress_scripts() {
 	// Add Genericons font.
 	wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', array(), '3.3.1' );
 
+	wp_enqueue_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', array(), '3.3.7');
+
 	wp_enqueue_style( 'font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', array(), '4.7.0' );
 
 	wp_enqueue_style( 'md-bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/css/mdb.min.css', array(), '4.3.2' );
@@ -255,6 +257,8 @@ function edupress_scripts() {
     wp_enqueue_style('gg-style', 'https://code.getmdl.io/1.3.0/material.indigo-pink.min.css', array(), '1.3');
 
     wp_enqueue_script('gg-js', 'https://code.getmdl.io/1.3.0/material.min.js', array(), '1.3.0');
+
+    wp_enqueue_style('gmd-style', get_template_directory_uri() . '/css/mdb.min.css', array(), '1.0');
 
 	wp_enqueue_script(
 		'jquery-slicknav',

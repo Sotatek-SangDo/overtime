@@ -14,9 +14,9 @@ Template Name: Schedule Page
             <?php get_sidebar(); ?>
             <main id="site-content" class="site-main" role="main">
                 <div class="schedule-page">
-                   <div class="box-homes">
+                   <div class="box-homes table-responsive">
                         <div class="header">Thông tin khóa học</div>
-                        <table cellspacing="0" cellpadding="0" border="1">
+                        <table cellspacing="0" cellpadding="0" border="1" class="table table-bordered table-hover">
                             <tbody>
                                 <tr>
                                     <td style="width:62px;">

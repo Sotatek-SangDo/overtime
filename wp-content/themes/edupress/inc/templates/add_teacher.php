@@ -24,9 +24,7 @@
                 </div>
                 <div class="add-item form-group">
                     <label class="title" for="info">Thông tin</label>
-                    <textarea type="text" name="information" class="form-control" rows="5" style="resize:none" placeholer="Nhập thông tin chi tiết ...">
-                        <?php echo checkIssetKey($_SESSION['teacher_current'], 'information');?>
-                    </textarea>
+                    <input type="text" name="information" class="form-control" placeholer="Nhập thông tin chi tiết ..." value="<?php echo checkIssetKey($_SESSION['teacher_current'], 'information');?>">
                 </div>
                 <div class="add-item form-group">
                     <label class="title" for="info">Ảnh</label>

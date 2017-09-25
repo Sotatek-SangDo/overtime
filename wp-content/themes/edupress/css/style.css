@@ -24,3 +24,49 @@ table {
     text-align: center;
     vertical-align: middle;
 }
+.news-page .row {
+    padding-left: 10px;
+}
+.news-page .row .col .card {
+    padding-left: 2%;
+}
+.col,
+.col .card {
+    min-height: 375px;
+}
+.card .none {
+    text-align: center;
+}
+.post_info p {
+    font-size: 11px;
+}
+.card .card-block .card-title {
+    font-weight: 600;
+}
+.page-teacher .row {
+    width: 100%;
+    margin: 0 auto;
+}
+.view a {
+    padding-right: 0;
+}
+.page-teacher .card h4,
+.page-teacher .card ul,
+.page-teacher .card p {
+    padding-left: 2%;
+}
+.page-teacher .card p {
+    text-align: justify;
+    padding-right: 2%;
+}
+.card .info {
+    padding: 2%;
+    margin-bottom: 2%;
+}
+.card .info span {
+    font-size: 15px;
+}
+.media-heading {
+    font-weight: 600;
+    text-transform: capitalize;
+}
