@@ -250,6 +250,12 @@ function edupress_scripts() {
 
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/css/style.css', array(), '1.0' );
 
+	wp_enqueue_style('gg-font', 'https://fonts.googleapis.com/icon?family=Material+Icons');
+
+    wp_enqueue_style('gg-style', 'https://code.getmdl.io/1.3.0/material.indigo-pink.min.css', array(), '1.3');
+
+    wp_enqueue_script('gg-js', 'https://code.getmdl.io/1.3.0/material.min.js', array(), '1.3.0');
+
 	wp_enqueue_script(
 		'jquery-slicknav',
 		get_template_directory_uri() . '/js/jquery.slicknav.min.js',
